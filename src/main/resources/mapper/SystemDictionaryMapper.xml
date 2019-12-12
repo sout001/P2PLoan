@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.P2PLoan.admin.mapper.SystemDictionaryMapper">
+    
+    <resultMap id="modelInfo" type="com.zking.P2PLoan.admin.model.SystemdictionaryModel">
+        <id column="id" property="id" javaType="java.lang.Integer" />
+        <result column="sn" property="sn" javaType="java.lang.String" />
+        <result column="title" property="title" javaType="java.lang.String" />
+        <result column="intro" property="intro" javaType="java.lang.String" />
+       <collection property="items" ofType="com.zking.P2PLoan.admin.model.SystemdictionaryitemModel">
+           <id column="id" property="id" javaType="java.lang.Integer"/>
+           <result column="parentId" property="parentId" javaType="java.lang.Integer" />
+           <result column="title" property="title" javaType="java.lang.String" />
+           <result column="tvalue" property="tvalue" javaType="java.lang.String" />
+           <result column="sequence" property="sequence" javaType="java.lang.Byte" />
+           <result column="intro" property="intro" javaType="java.lang.String" />
+       </collection>
+</resultMap>
+    
+    <select id="list" resultMap="modelInfo">
+        select * from systemdictionary t1
+          inner join systemdictionaryitem t2
+          on t1.id = t2.parentId
+          <where>
+              <if test="ParamMap !=null and ParamMap.size!=0">
+                  and t1.title like concat('%',#{ParamMap.title},'%')
+              </if>
+          </where>
+    </select>
+</mapper>

@@ -13,6 +13,7 @@
             <entry key="com.zeroturnaround.jrebel.remoting.DeleteUnindexedFiles" value="false" />
             <entry key="com.zeroturnaround.jrebel.remoting.ModuleRemoteServerSelection" value="off" />
             <entry key="jrebelEnabled" value="true" />
+            <entry key="lastExternalPluginCheckTime" value="1576058891201" />
           </map>
         </option>
         <option name="masterModuleName" />
@@ -21,6 +22,14 @@
         <option name="secure" value="true" />
         <option name="url" />
         <option name="xmlDir" />
+      </configuration>
+    </facet>
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="a.xml" value="2c9aaaf2-28df-4175-b1a1-8ae70abbeb85" />
+        </datasource-map>
+        <naming-strategy-map />
       </configuration>
     </facet>
   </component>
