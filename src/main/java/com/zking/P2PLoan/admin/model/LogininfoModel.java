@@ -1,19 +1,36 @@
-package com.zking.P2PLoan.model;
+package com.zking.P2PLoan.admin.model;
 
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * create by CSQ on 2019-12-12
+ * create by CSQ on 2019-12-15
  */
 @ToString
 public class LogininfoModel {
+
     private Integer id;
+
     private String username;
+
     private String password;
+
+    private String salt;
+
     private Byte state;
+
     private Integer userType;
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
     public Integer getId() {
         return id;

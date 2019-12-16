@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.P2PLoan.admin.mapper.SysRightMapper">
+    <select id="menuByCode" resultType="com.zking.P2PLoan.admin.model.SysrightModel">
+        select * from sysright where rightParentCode = #{rightCode}
+    </select>
+</mapper>
