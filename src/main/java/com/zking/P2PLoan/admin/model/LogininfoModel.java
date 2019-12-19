@@ -22,7 +22,7 @@ public class LogininfoModel {
 
     private Byte state;
 
-    private Integer userType;
+    private Byte userType;
 
     public String getSalt() {
         return salt;
@@ -64,11 +64,11 @@ public class LogininfoModel {
         this.state = state;
     }
 
-    public Integer getUserType() {
+    public Byte getUserType() {
         return userType;
     }
 
-    public void setUserType(Integer userType) {
+    public void setUserType(Byte userType) {
         this.userType = userType;
     }
 

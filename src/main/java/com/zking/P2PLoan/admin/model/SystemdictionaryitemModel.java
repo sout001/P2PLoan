@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * create by CSQ on 2019-12-12
  */
-@ToString
+@ToString(exclude = "systemdictionaryModel")
 public class SystemdictionaryitemModel {
     private Integer id;
     private Integer parentId;
@@ -15,6 +15,16 @@ public class SystemdictionaryitemModel {
     private String tvalue;
     private Byte sequence;
     private String intro;
+
+    private SystemdictionaryModel systemdictionaryModel;
+
+    public SystemdictionaryModel getSystemdictionaryModel() {
+        return systemdictionaryModel;
+    }
+
+    public void setSystemdictionaryModel(SystemdictionaryModel systemdictionaryModel) {
+        this.systemdictionaryModel = systemdictionaryModel;
+    }
 
     public Integer getId() {
         return id;

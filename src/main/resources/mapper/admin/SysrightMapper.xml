@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.P2PLoan.admin.mapper.SysrightMapper">
+
+
+    <resultMap id="ParentTreeResultMap" type="com.zking.P2PLoan.admin.model.SysrightModel">
+        <result column="id" property="id"/>
+        <result column="nodeName" property="nodeName"/>
+        <result column="nodeUrl" property="nodeUrl"/>
+        <result column="nodeUrl" property="nodeUrl"/>
+        <result column="nodeIcon" property="nodeIcon"/>
+        <result column="nodeType" property="nodeType"/>
+        <collection column="id" property="chilidren"  select="listChild" ofType="com.zking.P2PLoan.admin.model.SysrightModel" />
+    </resultMap>
+
+    <resultMap id="listChildResultMap" type="com.zking.P2PLoan.admin.model.SysrightModel">
+        <result column="id" property="id"/>
+        <result column="nodeName" property="nodeName"/>
+        <result column="nodeUrl" property="nodeUrl"/>
+        <result column="nodeUrl" property="nodeUrl"/>
+        <result column="nodeIcon" property="nodeIcon"/>
+        <result column="nodeType" property="nodeType"/>
+        <collection column="id" property="chilidren"  select="listChild" ofType="com.zking.P2PLoan.admin.model.SysrightModel" />
+    </resultMap>
+
+
+    <select id="getNodeTree" resultType="com.zking.P2PLoan.admin.model.SysrightModel">
+         SELECT * FROM sysright  WHERE parentId = #{id}
+    </select>
+    <select id="listChild" resultType="com.zking.P2PLoan.admin.model.SysrightModel">
+         SELECT * FROM sysright  WHERE parentId IS null
+    </select>
+</mapper>

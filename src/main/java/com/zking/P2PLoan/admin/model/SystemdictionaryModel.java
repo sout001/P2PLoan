@@ -4,12 +4,13 @@ import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
  * create by CSQ on 2019-12-12
  */
-@ToString(exclude = "items")
+@ToString(exclude = "keyWords")
 public class SystemdictionaryModel {
 
     private Integer id;
@@ -20,15 +21,25 @@ public class SystemdictionaryModel {
 
     private String intro;
 
-    private List<SystemdictionaryitemModel> items = new ArrayList<>();
+    private Integer status;
 
-    public List<SystemdictionaryitemModel> getItems() {
-        return items;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setItem(List<SystemdictionaryitemModel> items) {
-        this.items = items;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
+
+    //    private List<SystemdictionaryitemModel> items = new ArrayList<>();
+//
+//    public List<SystemdictionaryitemModel> getItems() {
+//        return items;
+//    }
+//
+//    public void setItem(List<SystemdictionaryitemModel> items) {
+//        this.items = items;
+//    }
 
     public Integer getId() {
         return id;

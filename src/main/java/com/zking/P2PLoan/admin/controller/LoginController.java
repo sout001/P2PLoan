@@ -1,6 +1,7 @@
 package com.zking.P2PLoan.admin.controller;
 
 import com.zking.P2PLoan.admin.model.LogininfoModel;
+import com.zking.P2PLoan.admin.service.IpLogServiceImpl;
 import com.zking.P2PLoan.admin.service.LoginServiceImpl;
 import com.zking.P2PLoan.util.DataProtocol;
 import okhttp3.internal.http2.ErrorCode;
@@ -27,6 +28,9 @@ public class LoginController {
     @Resource
     private LoginServiceImpl loginService;
 
+    @Resource
+    private IpLogServiceImpl ipLogService;
+
     /**
      * 通过用户登录的方法
      * @param logininfoModel
@@ -36,13 +40,13 @@ public class LoginController {
     public Object login(LogininfoModel logininfoModel){
 
         DataProtocol data = new DataProtocol();
-
         LogininfoModel userByUserName = loginService.getUserByUserName(logininfoModel.getUsername());
         if(userByUserName.getUserType()!=null&&userByUserName.getUserType()==1){
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(logininfoModel.getUsername(),logininfoModel.getPassword());
             try {
                 subject.login(token);
+                ipLogService.addRecordingByLogin(userByUserName.getUsername());
             } catch (AuthenticationException e) {
                 data.setCode(DataProtocol.FAIL);
                 data.setMessage("用户名或密码有误");

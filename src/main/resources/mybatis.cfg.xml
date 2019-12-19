@@ -8,7 +8,7 @@
         <setting name="logImpl" value="SLF4J"/>
 
         <!-- 开启二级缓存 -->
-        <!--<setting name="cacheEnabled" value="true"/>-->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
 
 

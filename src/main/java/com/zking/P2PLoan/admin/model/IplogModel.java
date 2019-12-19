@@ -2,6 +2,7 @@ package com.zking.P2PLoan.admin.model;
 
 import lombok.ToString;
 
+import java.net.InetAddress;
 import java.util.Date;
 import java.util.Objects;
 
@@ -37,7 +38,7 @@ public class IplogModel {
         return ip;
     }
 
-    public void setIp(String ip) {
+    public void setIp(String ip){
         this.ip = ip;
     }
 

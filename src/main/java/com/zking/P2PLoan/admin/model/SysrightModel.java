@@ -1,83 +1,96 @@
 package com.zking.P2PLoan.admin.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import lombok.ToString;
+
 import java.util.List;
 import java.util.Objects;
 
 /**
- * create by CSQ on 2019-12-15
+ * create by CSQ on 2019-12-18
  */
-public class SysrightModel  {
+@ToString
+public class SysrightModel {
 
-    private String rightCode;
+    private Integer id;
 
-    private String rightParentCode;
+    private String nodeName;
 
-    private String rightType;
+    private String nodeUrl;
 
-    private String rightText;
+    private String nodeIcon;
 
-    private String rightUrl;
+    private String nodeType;
 
-    private String rightTip;
+    private String nodeDesc;
 
-    private List<SysrightModel> childrens = new ArrayList<>();
+    private Integer parentId;
 
-    public List<SysrightModel> getChildrens() {
-        return childrens;
+    private List<SysrightModel> chilidren;
+
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setChildrens(List<SysrightModel> childrens) {
-        this.childrens = childrens;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
-    public String getRightCode() {
-        return rightCode;
+
+
+    public List<SysrightModel> getChilidren() {
+        return chilidren;
     }
 
-    public void setRightCode(String rightCode) {
-        this.rightCode = rightCode;
+    public void setChilidren(List<SysrightModel> chilidren) {
+        this.chilidren = chilidren;
     }
 
-    public String getRightParentCode() {
-        return rightParentCode;
+    public Integer getId() {
+        return id;
     }
 
-    public void setRightParentCode(String rightParentCode) {
-        this.rightParentCode = rightParentCode;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getRightType() {
-        return rightType;
+    public String getNodeName() {
+        return nodeName;
     }
 
-    public void setRightType(String rightType) {
-        this.rightType = rightType;
+    public void setNodeName(String nodeName) {
+        this.nodeName = nodeName;
     }
 
-    public String getRightText() {
-        return rightText;
+    public String getNodeUrl() {
+        return nodeUrl;
     }
 
-    public void setRightText(String rightText) {
-        this.rightText = rightText;
+    public void setNodeUrl(String nodeUrl) {
+        this.nodeUrl = nodeUrl;
     }
 
-    public String getRightUrl() {
-        return rightUrl;
+    public String getNodeIcon() {
+        return nodeIcon;
     }
 
-    public void setRightUrl(String rightUrl) {
-        this.rightUrl = rightUrl;
+    public void setNodeIcon(String nodeIcon) {
+        this.nodeIcon = nodeIcon;
     }
 
-    public String getRightTip() {
-        return rightTip;
+    public String getNodeType() {
+        return nodeType;
     }
 
-    public void setRightTip(String rightTip) {
-        this.rightTip = rightTip;
+    public void setNodeType(String nodeType) {
+        this.nodeType = nodeType;
+    }
+
+    public String getNodeDesc() {
+        return nodeDesc;
+    }
+
+    public void setNodeDesc(String nodeDesc) {
+        this.nodeDesc = nodeDesc;
     }
 
     @Override
@@ -85,16 +98,16 @@ public class SysrightModel  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SysrightModel that = (SysrightModel) o;
-        return Objects.equals(rightCode, that.rightCode) &&
-                Objects.equals(rightParentCode, that.rightParentCode) &&
-                Objects.equals(rightType, that.rightType) &&
-                Objects.equals(rightText, that.rightText) &&
-                Objects.equals(rightUrl, that.rightUrl) &&
-                Objects.equals(rightTip, that.rightTip);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(nodeName, that.nodeName) &&
+                Objects.equals(nodeUrl, that.nodeUrl) &&
+                Objects.equals(nodeIcon, that.nodeIcon) &&
+                Objects.equals(nodeType, that.nodeType) &&
+                Objects.equals(nodeDesc, that.nodeDesc);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rightCode, rightParentCode, rightType, rightText, rightUrl, rightTip);
+        return Objects.hash(id, nodeName, nodeUrl, nodeIcon, nodeType, nodeDesc);
     }
 }

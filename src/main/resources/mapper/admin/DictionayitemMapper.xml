@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.P2PLoan.admin.mapper.DictionayitemMapper">
+    
+    
+    <resultMap id="itemRow" type="com.zking.P2PLoan.admin.model.SystemdictionaryitemModel">
+        <id column="id" property="id" javaType="java.lang.Integer"/>
+        <result column="parentId" property="parentId" javaType="java.lang.Integer"/>
+        <result column="title" property="title" javaType="java.lang.String"/>
+        <result column="tvalue" property="tvalue" javaType="java.lang.String"/>
+        <result column="sequence" property="sequence" javaType="java.lang.Byte"/>
+        <result column="intro" property="intro" javaType="java.lang.String"/>
+        <association property="systemdictionaryModel" javaType="com.zking.P2PLoan.admin.model.SystemdictionaryModel">
+            <id column="id" property="id" javaType="java.lang.Integer"/>
+            <result column="sn" property="sn" javaType="java.lang.String"/>
+            <result column="title" property="title" javaType="java.lang.String"/>
+            <result column="intro" property="intro" javaType="java.lang.String"/>
+            <result column="status" property="status" javaType="java.lang.Integer"/>
+        </association>
+    </resultMap>
+
+
+    <insert id="addItem">
+      insert into systemdictionaryitem(parentId, title, tvalue, sequence, intro)
+      values (#{parentId},#{title},#{tvalue},#{sequence},#{ });
+    </insert>
+
+    <update id="updateItem">
+      update systemdictionaryitem set title = #{title},sequence = #{sequence} , intro = #{intro} ,parentId = #{parentId}
+      where id = 31;
+    </update>
+
+    <delete id="delItem">
+        delete from systemdictionaryitem where id = #{id};
+    </delete>
+
+    <select id="itemByParentId" resultType="com.zking.P2PLoan.admin.model.SystemdictionaryitemModel">
+        select * from systemdictionaryitem
+        <where>
+            <if test="title != null and title != ''">
+                and title like concat('%',#{title},'%')
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

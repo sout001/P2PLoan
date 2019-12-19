@@ -3,8 +3,8 @@
 <mapper namespace="com.zking.P2PLoan.admin.mapper.IpLogMapper">
 
     <insert id="addRecordingByLogin">
-        insert into iplog(ip, state, username, logininfoid, userType, logintime)
-        VALUES (#{ip},#{state},#{username},#{logininfoid},#{userType},#{logintime} );
+       insert into iplog(ip, state, username, logininfoid, userType, logintime)
+       values (#{ip},#{state},#{username},#{logininfoid},#{userType},#{logintime})
     </insert>
 
 </mapper>

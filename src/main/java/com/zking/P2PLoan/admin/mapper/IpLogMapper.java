@@ -10,8 +10,8 @@ public interface IpLogMapper {
 
     /**
      * 添加登录记录的方法
-     * @return
+     * @param username
      */
-    int addRecordingByLogin(IplogModel iplogModel);
+    void addRecordingByLogin(@Param("username") String username);
 
 }
