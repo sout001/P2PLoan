@@ -1,5 +1,6 @@
 package com.zking.P2PLoan.admin.controller;
 
+import com.zking.P2PLoan.admin.model.IplogModel;
 import com.zking.P2PLoan.admin.model.LogininfoModel;
 import com.zking.P2PLoan.admin.service.IpLogServiceImpl;
 import com.zking.P2PLoan.admin.service.LoginServiceImpl;
@@ -46,7 +47,8 @@ public class LoginController {
             UsernamePasswordToken token = new UsernamePasswordToken(logininfoModel.getUsername(),logininfoModel.getPassword());
             try {
                 subject.login(token);
-                ipLogService.addRecordingByLogin(userByUserName.getUsername());
+                IplogModel iplog = new IplogModel();
+                ipLogService.addRecordingByLogin(iplog,userByUserName);
             } catch (AuthenticationException e) {
                 data.setCode(DataProtocol.FAIL);
                 data.setMessage("用户名或密码有误");
@@ -58,5 +60,6 @@ public class LoginController {
 
         return data;
     }
+
 
 }

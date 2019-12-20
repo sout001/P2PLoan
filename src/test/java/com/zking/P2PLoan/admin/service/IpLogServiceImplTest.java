@@ -1,6 +1,7 @@
 package com.zking.P2PLoan.admin.service;
 
 import com.zking.P2PLoan.admin.model.IplogModel;
+import com.zking.P2PLoan.admin.model.LogininfoModel;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ public class IpLogServiceImplTest extends BaseTest{
 
     @Test
     public void addRecordingByLogin(){
-       ipLogService.addRecordingByLogin("CSQ");
+        IplogModel iplogModel = new IplogModel();
+        //ipLogService.addRecordingByLogin(iplogModel,"CSQ");
     }
 }

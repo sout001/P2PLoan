@@ -2,6 +2,7 @@ package com.zking.P2PLoan.admin.service;
 
 import com.zking.P2PLoan.admin.model.SystemdictionaryitemModel;
 import com.zking.P2PLoan.util.PageBean;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zking.P2PLoan.admin.mapper.LoginMapper">
 
+
+    <!-- 使用ehcache缓存 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
     <select id="getUserByUserName" resultType="com.zking.P2PLoan.admin.model.LogininfoModel">
-        select * from logininfo where username = #{username};
+        select * from logininfo t where t.username = #{username};
     </select>
+
 </mapper>

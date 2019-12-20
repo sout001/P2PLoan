@@ -22,7 +22,7 @@
 
     <insert id="addItem">
       insert into systemdictionaryitem(parentId, title, tvalue, sequence, intro)
-      values (#{parentId},#{title},#{tvalue},#{sequence},#{ });
+      values (#{parentId},#{title},#{tvalue},#{sequence},#{intro});
     </insert>
 
     <update id="updateItem">
