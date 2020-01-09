@@ -188,7 +188,7 @@
         <li class="divider"></li> 
         <li class="nav-header">我的账户</li> 
         <li class="active"> <a href="member_index.jsp"><span class="sl-icon-account"></span>账户总览</a> </li>
-        <li><a href='member_info.jsp'><span class="sl-icon-profile"></span>基本信息</a> </li>
+        <li><a href='<% request.getContextPath(); %>/userA'><span class="sl-icon-profile"></span>基本信息</a> </li>
         <li class="divider"></li> 
         <li class="nav-header">我的投资</li> 
         <li><a href='member_tuan.jsp'><span class="sl-icon-agreement"></span>团团赚</a> </li>
@@ -346,7 +346,7 @@
 </div>
 <div class="sum-number" ng-show="gotSummary">
 <h3 class="highlighted-sum ng-binding" ng-bind-html="summary.availableCash|slMoney">
-0
+${account.usableAmount}
 <small>.00元</small>
 </h3>
 <p class="highlighted-sum-caption">可用余额</p>

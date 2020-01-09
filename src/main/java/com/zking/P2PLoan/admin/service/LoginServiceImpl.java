@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.net.InetAddress;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * create by CSQ on 2019-12-15
@@ -32,4 +33,15 @@ public class LoginServiceImpl implements LoginService {
         LogininfoModel userByUserName = loginMapper.getUserByUserName(username);
         return userByUserName;
     }
+
+    @Override
+    public Set<String> getRolesByUserName(String userName) {
+        return loginMapper.getRolesByUserName(userName);
+    }
+
+    @Override
+    public Set<String> getPermissionByuserName(String userName) {
+        return loginMapper.getPermissionByuserName(userName);
+    }
+
 }

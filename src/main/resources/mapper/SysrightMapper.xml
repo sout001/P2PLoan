@@ -25,9 +25,9 @@
 
 
     <select id="getNodeTree" resultType="com.zking.P2PLoan.admin.model.SysrightModel">
-         SELECT * FROM sysright  WHERE parentId = #{id}
+          SELECT * FROM sysright  WHERE parentId IS null
     </select>
     <select id="listChild" resultType="com.zking.P2PLoan.admin.model.SysrightModel">
-         SELECT * FROM sysright  WHERE parentId IS null
+         SELECT * FROM sysright  WHERE parentId = #{id}
     </select>
 </mapper>

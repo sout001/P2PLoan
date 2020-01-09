@@ -71,10 +71,10 @@ public class PasswordHelper {
         System.out.println(salt);
         System.out.println(salt.length());
         //凭证+盐加密后得到的密码
-        String credentials = createCredentials("root", salt);
+        String credentials = createCredentials("123456", salt);
         System.out.println(credentials);
         System.out.println(credentials.length());
-        boolean b = checkCredentials("root", salt, credentials);
+        boolean b = checkCredentials("123456", salt, credentials);
         System.out.println(b);
     }
 }

@@ -31,23 +31,15 @@ public class SysRightServiceImplTest extends BaseTest{
 
     @Test
     public void listChild() {
-//        List<SysrightModel> nodeTree = sysRightService.getNodeTree();
-//        for (SysrightModel s : nodeTree){
-//            List<SysrightModel> sy = sysRightService.listChild(s.getId());
-//            for (SysrightModel sr : sy){
-//                System.out.println(sr);
-//            }
-//        }
-        List<SysrightModel> sy = sysRightService.listChild(2);
-        for (SysrightModel sr : sy){
-            System.out.println(sr.getId());
-            SysrightModel sysrightModel = new SysrightModel();
-            sysrightModel.setChilidren(sy);
-            List<SysrightModel> sysrightModels = sysRightService.listChild(sr.getId());
-            for (SysrightModel s : sysrightModels){
-                System.out.println(s);
-                sysrightModel.setChilidren(sysrightModels);
+        List<SysrightModel> nodeTree = sysRightService.getNodeTree();
+        for (SysrightModel s : nodeTree){
+            List<SysrightModel> sy = sysRightService.listChild(s.getId());
+            s.setChilidren(sy);
+            for (SysrightModel cs :s.getChilidren()){
+                System.out.println(cs);
             }
+
         }
+//
     }
 }

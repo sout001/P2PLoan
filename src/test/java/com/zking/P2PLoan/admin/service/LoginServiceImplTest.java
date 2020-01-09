@@ -10,6 +10,7 @@ import org.junit.Test;
 import javax.annotation.Resource;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +24,7 @@ public class LoginServiceImplTest extends BaseTest{
     
     @Test
     public void getUserByUserName() {
-        LogininfoModel user = loginService.getUserByUserName("CSQ");
+        LogininfoModel user = loginService.getUserByUserName("admin");
         System.out.println(user);
         System.out.println("---------------");
         //1,创建缓存管理器
@@ -33,4 +34,23 @@ public class LoginServiceImplTest extends BaseTest{
 
         Assert.assertNotNull(user);
     }
+
+    @Test
+    public void getRolesByUserName() {
+        Set<String> roles = loginService.getRolesByUserName("CSQ");
+        for (String r : roles) {
+            System.out.println(r);
+        }
+        Assert.assertEquals(roles.size(),1);
+    }
+
+    @Test
+    public void getPermissionByUserName() {
+        Set<String> permissions = loginService.getPermissionByuserName("admin");
+        for (String p : permissions) {
+            System.out.println(p);
+        }
+        Assert.assertEquals(permissions.size(),9);
+    }
+
 }

@@ -1,4 +1,10 @@
+<%@ page import="com.zking.P2PLoan.admin.model.LogininfoModel" %>
+<%@ page import="com.zking.P2PLoan.admin.service.UserInfoServiceImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${empty user}">
+ <jsp:forward page="login.jsp"></jsp:forward>
+</c:if>
 <html dir="ltr" lang="zh-CN" xml:lang="zh-CN">
  <head> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
@@ -41,6 +47,14 @@
   <link href="static/css/ie9.css?ver=142682356" rel="stylesheet">
   <![endif]--> 
 
+     <script>
+         function editing(){
+             var edit =document.getElementById("edname");
+             edit.style.display = "block";
+             alert(111);
+         }   
+     </script>
+     
  </head> 
  <body> 
   <!--[if lt IE 8]>
@@ -171,7 +185,7 @@
          <div class="profile"> 
           <h6 class="user-name ng-binding">
 晚上好!
-<p class="say-hi ng-binding">Member_11501404</p>
+<p class="say-hi ng-binding">${user.username}</p>
 </h6>
          </div> 
         </div> 
@@ -187,14 +201,14 @@
        <ul class="nav nav-list"> 
         <li class="divider"></li> 
         <li class="nav-header">我的账户</li> 
-        <li><a href="member_index.jsp"><span class="sl-icon-account"></span>账户总览</a> </li>
-        <li class="active"> <a href='member_info.jsp'><span class="sl-icon-profile"></span>基本信息</a> </li>
+        <li><a href="<% request.getContextPath(); %>/userinfo"><span class="sl-icon-account"></span>账户总览</a> </li>
+        <li class="active"> <a href='<% request.getContextPath(); %>/userA'><span class="sl-icon-profile"></span>基本信息</a> </li>
         <li class="divider"></li> 
-        <li class="nav-header">我的投资</li> 
-        <li><a href='member_tuan.jsp'><span class="sl-icon-agreement"></span>团团赚</a> </li>
-        <li ng-class="{active:isTabActive('invest-history')}"> <a href='member_bid_record.jsp'><span class="sl-icon-details-more"></span>投标记录</a> </li>
-        <li ng-class="{active:isTabActive('auto-invest')}"> <a href='member_bid_auto.jsp'><span class="sl-icon-dart"></span>自动投标</a> </li>
-        <li ng-class="{active:isTabActive('trade-history')}"> <a href='member_trade.jsp'><span class="sl-icon-tutorial"></span>交易记录</a> </li>
+        <li class="nav-header">我的投资</li>
+        <li><a href='<% request.getContextPath(); %>/Tz'><span class="sl-icon-agreement"></span>团团赚</a> </li>
+        <li ng-class="{active:isTabActive('invest-history')}"> <a href='<% request.getContextPath(); %>/Tzlist'><span class="sl-icon-details-more"></span>投标记录</a> </li>
+        <li ng-class="{active:isTabActive('auto-invest')}"> <a href='<% request.getContextPath(); %>/Autz'><span class="sl-icon-dart"></span>自动投标</a> </li>
+        <li ng-class="{active:isTabActive('trade-history')}"> <a href='<% request.getContextPath(); %>/Paylist'><span class="sl-icon-tutorial"></span>交易记录</a> </li>
         <li class="divider"></li> 
         <li class="nav-header">账户管理</li> 
         <li ng-class="{active:isTabActive('transfer')}"> <a href='member_pay.jsp'><span class="sl-icon-piggy-bank"></span>充值提现</a> </li>
@@ -222,7 +236,7 @@
 </div>
 <div class="pull-left">
 <div class="field">
-<h6 class="username ng-binding" ng-bind="basicProfile.name">Member_11501404</h6>
+<h6 class="username ng-binding" ng-bind="basicProfile.name">${user.username}</h6>
 </div>
 <div class="field clearfix">
 <span class="pull-left">资料完整度</span>
@@ -271,22 +285,25 @@
 <div class="row">
 <div class="col-xs-3 info-value text-center">用户名</div>
 <div class="col-xs-5" ng-show="!username.editing">
-<span class="ng-binding" ng-bind="basicProfile.profile.userName">Member_11501404</span>
+<span class="ng-binding" ng-bind="basicProfile.profile.userName">${user.username}</span>
 </div>
-<div class="col-xs-8 ng-hide" ng-show="username.editing">
+<div style="display: none" class="col-xs-8 ng-hide" ng-show="username.editing=true">
 <input class="form-control input-sm ng-pristine ng-valid" maxlength="24" placeholder="输入用户名，可用用户名直接登录" ng-model="username.userName" ng-class="{inputError:username.userNameError}">
 </div>
 <div class="col-xs-4" ng-show="!username.editing && !basicProfile.profile.isUserNameSet">
 <div>
-<a class="btn btn-secondary bind-blue btn-hollow" href="" ng-click="username.editing=true">修改</a>
+<a class="btn btn-secondary bind-blue btn-hollow" href="" ng-click="editing()">修改</a>
+    <button class="btn btn-secondary bind-blue btn-hollow" onclick="editing()">修改</button>
 </div>
 </div>
 </div>
-<div class="row ng-hide" ng-show="username.editing">
+<div id="edname" style="display: none" class="row ng-hide" ng-show="username.editing">
 <div class="col-xs-3"></div>
 <div class="col-xs-8">
 <span class="display-block ng-binding bind-blue" ng-bind="username.msg | addAsterisk" ng-class="{'bind-red': username.userNameError, 'bind-blue': !username.userNameError}">*用户名仅可修改一次</span>
+    <input class="form-control input-sm ng-pristine ng-valid" maxlength="24" placeholder="输入用户名，可用用户名直接登录" ng-model="username.userName" ng-class="{inputError:username.userNameError}">
 <span class="btn-group">
+
 <a class="btn btn-secondary btn-confirm" href="" ng-click="changeUserName()">确定</a>
 </span>
 <span class="btn-group">
@@ -299,7 +316,7 @@
 <div class="row">
 <div class="col-xs-3 info-value text-center">用户ID</div>
 <div class="col-xs-9">
-<span class="ng-binding" ng-bind="actorId">11501404</span>
+<span class="ng-binding" ng-bind="actorId">${user.id}</span>
 </div>
 </div>
 </div>
@@ -432,7 +449,7 @@
 <div class="row">
 <div class="col-xs-3 info-value text-center">真实姓名</div>
 <div class="col-xs-5" ng-show="!userIdentity.editing">
-<span class="bind-gray ng-scope" ng-if="!basicProfile.profile.realName">未验证</span>
+<span class="bind-gray ng-scope" ng-if="!basicProfile.profile.realName">${userinfo.realName}</span>
 </div>
 <div class="col-xs-8 ng-hide" ng-show="userIdentity.editing">
 <input class="form-control input-sm ng-pristine ng-valid" ng-focus="userIdentity.realNameError = false" placeholder="输入您的真实姓名" ng-model="userIdentity.realName" ng-class="{inputError:userIdentity.realNameError}">
@@ -451,7 +468,7 @@
 <div class="row">
 <div class="col-xs-3 info-value text-center">身份证号</div>
 <div class="col-xs-5" ng-show="!userIdentity.editing">
-<span class="bind-gray ng-scope" ng-if="!basicProfile.profile.idCard">未验证</span>
+<span class="bind-gray ng-scope" ng-if="!basicProfile.profile.idCard">${userinfo.idNumber}</span>
 </div>
 <div class="col-xs-8 ng-hide" ng-show="userIdentity.editing">
 <input class="form-control input-sm ng-pristine ng-valid" maxlength="18" ng-focus="userIdentity.idNumberError = false" placeholder="输入18位身份证号" ng-model="userIdentity.idNumber" ng-class="{inputError:userIdentity.idNumberError}">
@@ -477,7 +494,7 @@
 <div class="col-xs-3 info-value text-center">绑定邮箱</div>
 <div class="col-xs-5">
 <div class="" ng-show="!userEmail.editing">
-<span class="ng-binding ng-scope" ng-bind="userEmail.email" ng-if="!userEmail.isVerified && userEmail.email">416148489@qq.com</span>
+<span class="ng-binding ng-scope" ng-bind="userEmail.email" ng-if="!userEmail.isVerified && userEmail.email">${userinfo.email}</span>
 </div>
 </div>
 <div class="col-xs-8 ng-hide" ng-show="userEmail.editing">
@@ -520,7 +537,7 @@
 <div class="row" ng-show="!cellphoneVerification.phoneEditing">
 <div class="col-xs-3 info-value text-center">绑定手机</div>
 <div class="col-xs-5">
-<span class="ng-binding ng-scope" ng-if="cellphoneVerification.isVerified">180****1538</span>
+<span class="ng-binding ng-scope" ng-if="cellphoneVerification.isVerified">${userinfo.phoneNumber}</span>
 </div>
 <div class="col-xs-3">
 <div class="sl-icons bind-green ng-scope" ng-if="cellphoneVerification.isVerified">
@@ -577,11 +594,11 @@
 <div class="social-account clearfix">
 <div class="social-account-col pull-left">
 <div class="social-icon-div">
-<img class="img-rounded binding-img" ng-class="{active: isWechatBound(basicProfile.profile)}" src="/static/images/account/bind-wechat.png">
+<img class="img-rounded binding-img" ng-class="{active: isWechatBound(basicProfile.profile)}" src="./static/images/account/bind-wechat.png">
 </div>
 </div>
 <div class="social-account-col erweima-content pull-left ng-scope" ng-if="!isWechatBound(basicProfile.profile)">
-<img src="/static/images/account/erweima-small.png">
+<img src="./static/images/account/erweima-small.png">
 </div>
 <div class="social-account-col pull-left ng-scope" ng-if="!isWechatBound(basicProfile.profile)">
 <div class="wechat-desc">
@@ -596,7 +613,7 @@
 <div class="social-account clearfix">
 <div class="social-account-col pull-left">
 <div class="social-icon-div">
-<img class="img-rounded binding-img" ng-class="{active: isWeiboBound(basicProfile.profile)}" src="/static/images/account/bind-weibo.png">
+<img class="img-rounded binding-img" ng-class="{active: isWeiboBound(basicProfile.profile)}" src="./static/images/account/bind-weibo.png">
 </div>
 </div>
 <div class="social-account-col weibo-content pull-left">
@@ -608,7 +625,7 @@
 <div class="social-account clearfix">
 <div class="social-account-col pull-left">
 <div class="social-icon-div">
-<img class="img-rounded binding-img" ng-class="{active: isQQBound(basicProfile.profile)}" src="/static/images/account/bind-qq.png">
+<img class="img-rounded binding-img" ng-class="{active: isQQBound(basicProfile.profile)}" src="./static/images/account/bind-qq.png">
 </div>
 </div>
 <div class="social-account-col weibo-content pull-left">

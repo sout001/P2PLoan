@@ -11,6 +11,8 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.jboss.jandex.Result;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +28,11 @@ import javax.annotation.Resource;
 @RestController
 public class LoginController {
 
+    /**
+     * 日志对象
+     */
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Resource
     private LoginServiceImpl loginService;
 
@@ -37,21 +44,30 @@ public class LoginController {
      * @param logininfoModel
      * @return
      */
-    @RequestMapping("/admin/login")
+    @RequestMapping(value = "/admin/login",method = RequestMethod.POST)
     public Object login(LogininfoModel logininfoModel){
 
         DataProtocol data = new DataProtocol();
         LogininfoModel userByUserName = loginService.getUserByUserName(logininfoModel.getUsername());
         if(userByUserName.getUserType()!=null&&userByUserName.getUserType()==1){
-            Subject subject = SecurityUtils.getSubject();
-            UsernamePasswordToken token = new UsernamePasswordToken(logininfoModel.getUsername(),logininfoModel.getPassword());
-            try {
-                subject.login(token);
-                IplogModel iplog = new IplogModel();
-                ipLogService.addRecordingByLogin(iplog,userByUserName);
-            } catch (AuthenticationException e) {
-                data.setCode(DataProtocol.FAIL);
-                data.setMessage("用户名或密码有误");
+            if(userByUserName.getState()==0&&userByUserName.getState()!=null){
+                Subject subject = SecurityUtils.getSubject();
+                UsernamePasswordToken token = new UsernamePasswordToken(logininfoModel.getUsername(),logininfoModel.getPassword());
+                try {
+                    subject.login(token);
+                    data.setData(token);
+                    IplogModel iplog = new IplogModel();
+                    logger.info("登录成功："+userByUserName.getUsername());
+                    ipLogService.addRecordingByLogin(iplog,userByUserName);
+                } catch (AuthenticationException e) {
+                    data.setCode(DataProtocol.FAIL);
+                    data.setMessage("用户名或密码有误");
+                    logger.info(e.getMessage());
+                    e.printStackTrace();
+                }
+            } else {
+                data.setCode(400);
+                data.setMessage("账户已停用");
             }
         } else {
             data.setCode(300);
@@ -61,5 +77,19 @@ public class LoginController {
         return data;
     }
 
+    @RequestMapping(value = "/admin/logout",method = RequestMethod.GET)
+    public Object logout(){
+        DataProtocol data = new DataProtocol();
+        Subject subject = SecurityUtils.getSubject();
+        boolean authenticated = subject.isAuthenticated();
+        System.out.println(authenticated);
+        if(!subject.isAuthenticated()){
+            subject.logout();
+        } else {
+            data.setCode(202);
+            data.setMessage("请先登录在进行此操作");
+        }
+        return data;
+    }
 
 }

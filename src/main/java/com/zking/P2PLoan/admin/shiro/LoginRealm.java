@@ -4,6 +4,7 @@ import com.zking.P2PLoan.admin.model.LogininfoModel;
 import com.zking.P2PLoan.admin.service.LoginServiceImpl;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -26,6 +27,14 @@ public class LoginRealm extends AuthorizingRealm  {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+//        //获取用户名
+//        String userName = principals.getPrimaryPrincipal().toString();
+//        //生产授权信息
+//        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+//        //添加角色信息
+//        authorizationInfo.addRoles(loginService.getRolesByUserName(userName));
+//        //设置该角色的权限
+//        authorizationInfo.setStringPermissions(loginService.getPermissionByuserName(userName));
         return null;
     }
 

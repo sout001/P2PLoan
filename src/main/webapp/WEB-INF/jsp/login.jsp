@@ -171,22 +171,23 @@
       </div> 
       <!-- Login Form --> 
       <div class="col-xs-4 login-content-form"> 
-       <h6 class="login-content-form-title">欢迎回来</h6> 
-       <form name="loginForm" class="loginForm" role="form" ng-submit="submit()" novalidate=""> 
+       <h6 class="login-content-form-title">欢迎回来</h6>
+       <%--${massage}--%>
+       <form name="loginForm" class="loginForm" method="post" action="<% request.getContextPath(); %>/login" role="form" ng-submit="submit()" novalidate="">
         <div ng-repeat="error in errors" ng-show="errors.length &gt; 0" ng-cloak="" class="errorInLogin">
           {{error}} 
         </div> 
         <div class="form-group"> 
          <div class="input-group"> 
           <span class="input-group-addon sl-icon-personal"></span> 
-          <input id="usernameSingle" type="text" class="form-control input-with-icon forcePlaceholder" ng-model="username" ng-focus="inputFocus=true" ng-blur="inputFocus=false" placeholder="请输入注册时的手机号或邮箱" required="" /> 
+          <input id="username" name="username" type="text" class="form-control input-with-icon forcePlaceholder" ng-model="username" ng-focus="inputFocus=true" ng-blur="inputFocus=false" placeholder="请输入注册时的手机号或邮箱" required="" />
          </div> 
          <span class="errors ng-hide">对不起，请输入正确的用户名</span> 
         </div> 
         <div class="form-group "> 
          <div class="input-group pwd"> 
           <span class="input-group-addon sl-icon-lock lock" ng-class="{active:focus}"></span> 
-          <input id="passwordSingle" type="password" class="form-control input-with-icon forcePlaceholder" ng-model="password" ng-focus="focus=true" ng-blur="focus=false" placeholder="请输入登录密码" required="" /> 
+          <input id="password" name="password" type="password" class="form-control input-with-icon forcePlaceholder" ng-model="password" ng-focus="focus=true" ng-blur="focus=false" placeholder="请输入登录密码" required="" />
          </div> 
          <span class="errors ng-hide">需要输入密码</span> 
         </div> 

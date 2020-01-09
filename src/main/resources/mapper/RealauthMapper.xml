@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.P2PLoan.admin.mapper.RealauthMapper">
+
+    <update id="updateReala">
+        update realauth set state = #{state} where id = #{id};
+    </update>
+
+    <select id="getRealauthByDate" resultType="com.zking.P2PLoan.admin.model.RealauthModel">
+        select t1.*,t2.username from realauth t1 inner join logininfo t2 on t1.auditor_id = t2.id
+        <where>
+            <if test="StartTime !=null and StartTime !='' and EndTime !=null and EndTime !=''  ">
+                and t1.auditTime BETWEEN #{StartTime} AND #{EndTime};
+            </if>
+        </where>
+    </select>
+</mapper>

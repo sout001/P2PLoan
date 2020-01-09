@@ -2,14 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zking.P2PLoan.admin.mapper.IpLogMapper">
 
+    <!--<resultMap id="iplogInfoRow" type="com.zking.P2PLoan.admin.model.IplogModel">-->
+        <!--<id column="id" property="id" javaType="java.lang.Integer"/>-->
+        <!--<result column="ip" property="ip" javaType="java.lang.String"/>-->
+        <!--<result column="state" property="state" javaType="java.lang.Byte"/>-->
+        <!--<result column="username" property="username" javaType="java.lang.String"/>-->
+        <!--<result column="logininfoid" property="logininfoid" javaType="java.lang.Integer"/>-->
+        <!--<result column="userType" property="userType" javaType="java.lang.Byte"/>-->
+        <!--<result column="logintime" property="logintime" javaType="java.util.Date"/>-->
+        <!--<association column="id" property="id" javaType="com.zking.P2PLoan.admin.model.LogininfoModel">-->
+            <!--<id column="id" property="id" javaType="java.lang.Integer"/>-->
+            <!--<result column="username" property="username" javaType="java.lang.String"/>-->
+            <!--<result column="password" property="password" javaType="java.lang.String"/>-->
+            <!--<result column="salt" property="salt" javaType="java.lang.String"/>-->
+            <!--<result column="state" property="state" javaType="java.lang.Byte"/>-->
+            <!--<result column="userType" property="userType" javaType="java.lang.Byte"/>-->
+        <!--</association>-->
+    <!--</resultMap>-->
 
     <insert id="addRecordingByLogin">
        insert into iplog(ip, state, username, logininfoid, userType, logintime)
        VALUES (#{param1.ip},#{param1.state},#{param1.username},#{param1.logininfoid},#{param1.userType},#{param1.logintime});
     </insert>
+
     <delete id="DelByID">
-
-
-
+        delete from iplog where id = #{id};
     </delete>
+
+    <select id="LogList" resultType="com.zking.P2PLoan.admin.model.IplogModel">
+        SELECT * FROM iplog
+        <where>
+            <if test="username != null and username != ''">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="logintime != null and logintime != ''">
+                and logintime like concat('%',#{logintime},'%')
+            </if>
+        </where>
+          ORDER BY logintime DESC
+    </select>
 </mapper>

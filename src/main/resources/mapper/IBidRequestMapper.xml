@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.P2PLoan.home.mapper.IBidRequestMapper">
+
+
+    <insert id="addBid">
+      insert into
+      bidrequest(version, returnType, bidRequestType, bidRequestState, bidRequestAmount, currentRate, monthes2Return, bidCount, totalRewardAmount, currentSum, title, description, note, disableDate, createuser_id, disableDays, minBidAmount, applyTime, publishTime)
+      VALUES (1,1,0,0,#{bidRequestAmount},5,#{monthes2Return},0,250,0,#{title},#{description},'申请',#{disableDate},#{createuserId},100,100,#{applyTime},#{publishTime});
+
+    </insert>
+
+    <update id="updateBid">
+      update bidrequest
+        set version = #{version},bidCount = #{bidCount},currentSum = #{currentSum}
+      where id = #{id};
+    </update>
+
+    <update id="passed">
+        update bidrequest set bidRequestState = #{bidRequestState}, note = #{note} where id = #{id}
+    </update>
+
+    <select id="getBidList" resultType="com.zking.P2PLoan.home.model.BidrequestModel">
+        select * from bidrequest
+        <where>
+              bidRequestState = 1
+            <if test="id !=null and id !=''">
+                 and id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="ReviewByBidrequest" resultType="com.zking.P2PLoan.home.model.BidrequestModel">
+        select * from bidrequest
+        <where>
+            bidRequestState = 0;
+        </where>
+    </select>
+
+</mapper>

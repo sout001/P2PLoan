@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * create by CSQ on 2019-12-16
  */
-@ToString
+@ToString(exclude = "login")
 public class IplogModel {
 
     private Integer id;
@@ -25,6 +25,16 @@ public class IplogModel {
     private Byte userType;
 
     private Date logintime;
+
+    private LogininfoModel login;
+
+    public LogininfoModel getLogin() {
+        return login;
+    }
+
+    public void setLogin(LogininfoModel login) {
+        this.login = login;
+    }
 
     public Integer getId() {
         return id;

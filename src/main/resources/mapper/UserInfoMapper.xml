@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.P2PLoan.admin.mapper.UserInfoMapper">
+
+    <insert id="addUser">
+        insert into logininfo(username, password, salt, state, userType) values (#{username},#{password},#{salt},0,1);
+    </insert>
+
+
+    <update id="updateUser">
+         update logininfo  set state = #{state} where id = #{id};
+    </update>
+
+
+    <select id="getUserinList" resultType="com.zking.P2PLoan.admin.model.LogininfoModel">
+        select * from logininfo t1
+        inner join loginuser t2 on t1.id = t2.lid
+        inner join userinfo u on t2.uid = u.id
+        <where>
+            <choose>
+                <when test="UserType==null">
+                    and  <![CDATA[ t1.userType <> 1 ]]>
+                </when>
+                <when test="UserType!=null">
+                    and t1.userType = #{UserType}
+                </when>
+            </choose>
+            <if test="UserName != null and UserName != ''">
+                and t1.username like concat('%',#{UserName},'%')
+            </if>
+            <if test="RealName != null and RealName != ''">
+                and u.realName like concat('%',#{RealName},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

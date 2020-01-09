@@ -24,6 +24,16 @@ public class LogininfoModel {
 
     private Byte userType;
 
+    private String realName;
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
     public String getSalt() {
         return salt;
     }

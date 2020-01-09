@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html dir="ltr" lang="zh-CN" xml:lang="zh-CN">
- <head> 
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-  <meta name="description" content="点融网为广大个人和微小企业提供便利的投融资服务。借款产品灵活、大额、费用低、手续快；投资方式人性友好、回报高、百分百本金保护！Dianrong.com provides online efficient investment and financing services for individuals and SMEs. Better rates, lower cost, faster way to borrowers and more flexible investment, higher returns, 100% principal protection to investors." /> 
-  <meta name="keywords" content="P2P网贷,P2P网络贷款平台,P2P网络投资平台,P2P投资理财平台,网络贷款平台,团团赚,点融,点融网,点融官网" /> 
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="description" content="点融网为广大个人和微小企业提供便利的投融资服务。借款产品灵活、大额、费用低、手续快；投资方式人性友好、回报高、百分百本金保护！Dianrong.com provides online efficient investment and financing services for individuals and SMEs. Better rates, lower cost, faster way to borrowers and more flexible investment, higher returns, 100% principal protection to investors." />
+  <meta name="keywords" content="P2P网贷,P2P网络贷款平台,P2P网络投资平台,P2P投资理财平台,网络贷款平台,团团赚,点融,点融网,点融官网" />
   <link rel="shortcut icon" href="static/images/favicon.ico" />
-  <title>我要投资- market.html</title> 
+  <title>我要投资- market.html</title>
   <link href="static/css/bootstrap.min.css" rel="stylesheet" />
   <link href="static/css/components.css?ver=142682356" rel="stylesheet" />
   <link href="static/css/main.css?ver=142682356" rel="stylesheet" />
@@ -33,16 +34,37 @@
       }
     }
   </style>
-  <!-- Add support for bootstrap in IE8 --> 
+  <!-- Add support for bootstrap in IE8 -->
   <!--[if lt IE 9]>
   <link href="static/css/ie8.css?ver=142682356" rel="stylesheet">
-  <![endif]--> 
+  <![endif]-->
   <!--[if IE 9]>
   <link href="static/css/ie9.css?ver=142682356" rel="stylesheet">
   <![endif]-->
+
+     <script>
+         function add() {
+             alert(111);
+             var moeny = 100.00;
+             var tz = prompt("请输入投资金额不低于￥100.00",moeny);
+             if(tz!=null && tz!="" && tz>=100){
+                 $.ajax({
+                     type: "Get",
+                     url: "<% request.getContextPath(); %>/Investment",      //你的controller地址
+                     data: { availableAmount:tz,actualRate:8,bidrequestId:3,bidRequestTitle:'测试啊',bidRequestState:8 },
+                     success: function (data) {
+
+                     }
+                 });
+             } else {
+                 alert("金额低于起投金额！请重试");
+             }
+         }
+     </script>
+
  </head>
 
- <body> 
+ <body>
   <!--[if lt IE 8]>
 <div class="alert alert-warning text-center" style="margin-bottom:0;">
   <p>你的浏览器不支持点融网的一些新特性，请升级你的浏览器至<a href="http://se.360.cn/">360浏览器</a>或<a href="http://browsehappy.com/">Chrome</a>。
@@ -50,175 +72,175 @@
   <p>正在为你跳转到旧版网站...<a href="index.jsp">立即跳转</a></p>
   <p>2015年了，IE8老了...</p>
 </div>
-<![endif]--> 
-  <div class="wrapper "> 
-   <!--header--> 
-   <header class="sl-header" ng-controller="HeaderCtrl" id="sl-header"> 
-    <nav class="navbar navbar-inverse navbar-static-top site-nav" role="navigation"> 
-     <div class="container"> 
-      <!-- Contact info --> 
-      <ul class="nav navbar-nav site-nav-sns"> 
-       <li class="site-nav-sns-phone"><span class="navbar-text">客服热线：400-921-9218</span></li> 
-       <li> <a href="#" class="icon-sns qq"> 
-         <div class="social-content"> 
-          <p class="social-title">点融网官方QQ群</p> 
-          <p>141444867</p> 
-         </div> </a> </li> 
-       <li> <a href="http://weibo.com/dianrongwang" target="_blank" class="icon-sns weibo" rel="nofollow"></a> </li> 
-       <li> <a href="#" class="icon-sns wechat"> 
-         <div class="social-content"> 
-          <p class="social-title">扫描关注微信公众号</p> 
+<![endif]-->
+  <div class="wrapper ">
+   <!--header-->
+   <header class="sl-header" ng-controller="HeaderCtrl" id="sl-header">
+    <nav class="navbar navbar-inverse navbar-static-top site-nav" role="navigation">
+     <div class="container">
+      <!-- Contact info -->
+      <ul class="nav navbar-nav site-nav-sns">
+       <li class="site-nav-sns-phone"><span class="navbar-text">客服热线：400-921-9218</span></li>
+       <li> <a href="#" class="icon-sns qq">
+         <div class="social-content">
+          <p class="social-title">点融网官方QQ群</p>
+          <p>141444867</p>
+         </div> </a> </li>
+       <li> <a href="http://weibo.com/dianrongwang" target="_blank" class="icon-sns weibo" rel="nofollow"></a> </li>
+       <li> <a href="#" class="icon-sns wechat">
+         <div class="social-content">
+          <p class="social-title">扫描关注微信公众号</p>
           <p><img src="static/images/qr-code.jpg" /></p>
-         </div> </a> </li> 
+         </div> </a> </li>
       </ul>
 
-      <!-- For non-login users --> 
-      <ul id="nonLoginBar" class="nav navbar-nav navbar-right navbar-sm site-nav-login"> 
+      <!-- For non-login users -->
+      <ul id="nonLoginBar" class="nav navbar-nav navbar-right navbar-sm site-nav-login">
        <li><a id="login-panel" href="login.jsp" rel="nofollow">登录</a></li>
        <li><a id="create-account" href="reg.jsp" class="btn btn-sm" rel="nofollow">注册账户</a></li>
-      </ul> 
-      <!-- For login users --> 
-      <ul class="nav navbar-nav navbar-right navbar-sm site-nav-user ng-cloak" ng-if="isAuthenticated()"> 
-       <!-- Shopping Cart Widget --> 
-       <li ng-show="hasRole('LENDER')" class="dropdown shopping-cart-widget" ng-controller="CartSummaryCtrl"> 
-        <!-- Shopping Cart Widget: Not yet invested --> 
-        <ul class="dropdown-menu" ng-show="cart.amountSum==0"> 
+      </ul>
+      <!-- For login users -->
+      <ul class="nav navbar-nav navbar-right navbar-sm site-nav-user ng-cloak" ng-if="isAuthenticated()">
+       <!-- Shopping Cart Widget -->
+       <li ng-show="hasRole('LENDER')" class="dropdown shopping-cart-widget" ng-controller="CartSummaryCtrl">
+        <!-- Shopping Cart Widget: Not yet invested -->
+        <ul class="dropdown-menu" ng-show="cart.amountSum==0">
          <li class="shopping-cart-empty"> <p>你还没有投标，查看<a href="market.jsp">热投项目</a>，立即开启投资之旅！</p> </li>
-        </ul> 
-        <!-- Shopping Cart Widget: Invested --> 
-        <ul class="dropdown-menu" ng-show="cart.amountSum!= 0" ng-controller="CartCtrl"> 
-         <li class="shopping-cart-title"> <span>投标 <strong>{{ cart.itemsCount }}笔</strong> </span> <span class="pull-right"> 总额<span ng-bind-html="cart.amountSum | slMoney"></span> </span> </li> 
-         <li class="divider"></li> 
-         <li ng-repeat="item in cart.items" class="shopping-cart-item" ng-mouseover="show=true" ng-mouseleave="show=false" ng-init="show=false"> <a href="#"> <span>{{item.loanTitle | slStringTruncate:18}}</span> <span ng-bind-html="item.amount | slMoney" ng-class="{hidden:show}"></span> <span data-toggle="modal" data-target="#deleteCartItem" class="sl-icon-trash hidden" ng-click="transId(item.loanId)" ng-class="{hidden:!show}"></span> </a> </li> 
-         <li class="divider"></li> 
-         <li class="shopping-cart-checkout"> <a id="checkout-shopping-cart" href="/market/checkout" class="btn btn-sm btn-primary btn-block btn-embossed">查看购物车</a> </li> 
-        </ul> </li> 
-       <!-- My Account Menu --> 
+        </ul>
+        <!-- Shopping Cart Widget: Invested -->
+        <ul class="dropdown-menu" ng-show="cart.amountSum!= 0" ng-controller="CartCtrl">
+         <li class="shopping-cart-title"> <span>投标 <strong>{{ cart.itemsCount }}笔</strong> </span> <span class="pull-right"> 总额<span ng-bind-html="cart.amountSum | slMoney"></span> </span> </li>
+         <li class="divider"></li>
+         <li ng-repeat="item in cart.items" class="shopping-cart-item" ng-mouseover="show=true" ng-mouseleave="show=false" ng-init="show=false"> <a href="#"> <span>{{item.loanTitle | slStringTruncate:18}}</span> <span ng-bind-html="item.amount | slMoney" ng-class="{hidden:show}"></span> <span data-toggle="modal" data-target="#deleteCartItem" class="sl-icon-trash hidden" ng-click="transId(item.loanId)" ng-class="{hidden:!show}"></span> </a> </li>
+         <li class="divider"></li>
+         <li class="shopping-cart-checkout"> <a id="checkout-shopping-cart" href="/market/checkout" class="btn btn-sm btn-primary btn-block btn-embossed">查看购物车</a> </li>
+        </ul> </li>
+       <!-- My Account Menu -->
        <li class="dropdown"> <a href="member_info.jsp" class="dropdown-toggle hoverHeader" ng-show="session.firstLoaded &amp;&amp; session.actor.username" data-toggle="dropdown" data-hover="dropdown">素材火的账户 <b class="caret"></b></a>
-        <ul class="dropdown-menu"> 
+        <ul class="dropdown-menu">
          <li><a href="member_info.jsp">我的账户</a></li>
          <li><a href="index.jsp" ng-click="logout()">退出</a></li>
-        </ul> </li> 
-      </ul> 
-     </div> 
+        </ul> </li>
+      </ul>
+     </div>
     </nav>
 
-    <div class="site-menu"> 
-     <div class="header-navbar-container sl-nav-wrapper header-nav-container"> 
-      <nav class="navbar navbar-static-top sl-navbar" role="navigation"> 
-       <div class="container"> 
-        <div class="navbar-header  col-xs-6"> 
-         <button type="button" class="navbar-toggle"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+    <div class="site-menu">
+     <div class="header-navbar-container sl-nav-wrapper header-nav-container">
+      <nav class="navbar navbar-static-top sl-navbar" role="navigation">
+       <div class="container">
+        <div class="navbar-header  col-xs-6">
+         <button type="button" class="navbar-toggle"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
          <a class="navbar-brand" href="index.jsp"> <span class="sl-logo">点融网 - DianRong</span> </a>
-        </div> 
-        <div class=" navbar-collapse navbar-ex1-collapse sl-nav"> 
-         <ul class="nav navbar-nav main-menu navbar-right"> 
-          <!--menus--> 
+        </div>
+        <div class=" navbar-collapse navbar-ex1-collapse sl-nav">
+         <ul class="nav navbar-nav main-menu navbar-right">
+          <!--menus-->
           <li class="main-link-list"> <a class="main-link" href="market.jsp"> <span class="main-link-text">我要投资</span> </a> </li>
           <li class="main-link-list"> <a class="main-link" href="borrow.jsp"> <span class="main-link-text">我要借款</span> </a> </li>
-          <li class="main-link-list" ng-class="{active:isActive('/public/help-center')}"> <a class="main-link" href="help.html"> <span class="main-link-text">帮助中心</span> </a> </li> 
+          <li class="main-link-list" ng-class="{active:isActive('/public/help-center')}"> <a class="main-link" href="help.html"> <span class="main-link-text">帮助中心</span> </a> </li>
           <li class="main-link-list"> <a class="main-link" href="about.jsp"> <span class="main-link-text">关于我们</span> </a> </li>
-         </ul> 
-        </div> 
-        <!-- /.navbar-collapse --> 
-       </div> 
-      </nav> 
+         </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+       </div>
+      </nav>
      </div>
 
-     <!--secondaryNav--> 
-     <div class="browse-tabs clearfix container"> 
-      <div class="row"> 
-       <div class="browse-tab col-xs-9"> 
-        <ul id="market-type-bar" class="nav nav-tabs"> 
-         <li class="active"><a data-toggle="tab" >团团赚<span class="badge">新</span></a></li> 
+     <!--secondaryNav-->
+     <div class="browse-tabs clearfix container">
+      <div class="row">
+       <div class="browse-tab col-xs-9">
+        <ul id="market-type-bar" class="nav nav-tabs">
+         <li class="active"><a data-toggle="tab" >团团赚<span class="badge">新</span></a></li>
          <!--
         <li><a class="gm" data-toggle="tab" href="#guarantee-market">保障标<span
             class="badge" ng-bind="guar_number"></span></a></li>
-        --> 
-         <li><a class="pm" data-toggle="tab" >投标列表<span class="badge" ng-bind="pri_number"></span></a></li> 
-         <li><a class="sm secTitle" data-toggle="tab" >债权转让列表 
-           <!--<span class="badge" ng-bind="sec_number"></span>--> </a> </li> 
-        </ul> 
-       </div> 
-       <div class="recharge-tab col-xs-3"> 
+        -->
+         <li><a class="pm" data-toggle="tab" >投标列表<span class="badge" ng-bind="pri_number"></span></a></li>
+         <li><a class="sm secTitle" data-toggle="tab" >债权转让列表
+           <!--<span class="badge" ng-bind="sec_number"></span>--> </a> </li>
+        </ul>
+       </div>
+       <div class="recharge-tab col-xs-3">
         <div class="recharge-ctrl" ng-if="isAuthenticated()" ng-cloak="">
           可投资金额
-         <span class="avail-amount" ng-bind="cart.availableToInvest|slCurrency"></span> 
+         <span class="avail-amount" ng-bind="cart.availableToInvest|slCurrency"></span>
          <a href="member_pay.jsp"><span class="recharge-icon"></span></a>
-        </div> 
-        <div class="calculator-ctrl"> 
-         <a ng-show="showCalculator" data-toggle="modal" data-target="#calModal"><span class="sl-icon-calculator"></span></a> 
-        </div> 
+        </div>
+        <div class="calculator-ctrl">
+         <a ng-show="showCalculator" data-toggle="modal" data-target="#calModal"><span class="sl-icon-calculator"></span></a>
+        </div>
        </div>
 
-       <!-- Modal --> 
-       <div class="modal fade lender-calculator" id="calModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
-        <div class="modal-dialog"> 
-         <div class="modal-content"> 
-          <div class="modal-header"> 
-           <button type="button" class="close sl-icon-cross" data-dismiss="modal" aria-hidden="true"></button> 
-           <h4 class="modal-title" id="myModalLabel">还款计算器</h4> 
-          </div> 
-          <div class="modal-body"> 
-           <div sl-loan-calculator=""></div> 
-          </div> 
-         </div> 
-         <!-- /.modal-content --> 
-        </div> 
-        <!-- /.modal-dialog --> 
-       </div> 
-       <!-- /.modal --> 
-      </div> 
-     </div> 
-     <a class="sl-icon-arrow-up clickToTop" id="scrollToTop"> </a> 
-     <!--jumbotron--> 
-    </div> 
-   </header> 
-   <div class="modal fade" id="deleteCartItem" tabindex="-1" role="dialog" aria-hidden="true"> 
-    <div class="modal-dialog" ng-controller="CartCtrl"> 
-     <div class="modal-content"> 
-      <div class="modal-header"> 
-       <button type="button" class="close sl-icon-cross" data-dismiss="modal" aria-hidden="true"></button> 
-       <h6 class="modal-title">删除投标</h6> 
-      </div> 
-      <div class="modal-body"> 
-       <h4>确定删除投标：ID{{selectedId}}？</h4> 
-      </div> 
-      <div class="modal-footer"> 
-       <a class="btn btn-link" data-dismiss="modal">取消</a> 
-       <a class="btn btn-action" ng-model="loanId" ng-click="removeNote()">删除</a> 
-      </div> 
-     </div> 
-    </div> 
-   </div> 
-   <div id="notifications" ng-show="notify.messages.msg.length &gt; 0" class="ng-cloak affix-top" data-spy="affix" data-offset-top="0"> 
-    <div class="container"> 
-     <div class="msg-fold-up" ng-class="{ 'alert-success' : notify.messages.type == 'success', 'alert-danger' : notify.messages.type == 'error', 'alert-info' : notify.messages.type == 'info' }"> 
-     </div> 
-     <div class="alert msg-content"> 
-      <a type="button" class="close sl-icon-cross" ng-click="notify.dismiss($index)" aria-hidden="true"></a> 
-      <p ng-repeat="m in notify.messages.msg track by $index" ng-bind-html="m"></p> 
-     </div> 
-     <div class="msg-fold-down" ng-class="{ 'alert-success' : notify.messages.type == 'success', 'alert-danger' : notify.messages.type == 'error', 'alert-info' : notify.messages.type == 'info' }"> 
-     </div> 
-    </div> 
+       <!-- Modal -->
+       <div class="modal fade lender-calculator" id="calModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+         <div class="modal-content">
+          <div class="modal-header">
+           <button type="button" class="close sl-icon-cross" data-dismiss="modal" aria-hidden="true"></button>
+           <h4 class="modal-title" id="myModalLabel">还款计算器</h4>
+          </div>
+          <div class="modal-body">
+           <div sl-loan-calculator=""></div>
+          </div>
+         </div>
+         <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+       </div>
+       <!-- /.modal -->
+      </div>
+     </div>
+     <a class="sl-icon-arrow-up clickToTop" id="scrollToTop"> </a>
+     <!--jumbotron-->
+    </div>
+   </header>
+   <div class="modal fade" id="deleteCartItem" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" ng-controller="CartCtrl">
+     <div class="modal-content">
+      <div class="modal-header">
+       <button type="button" class="close sl-icon-cross" data-dismiss="modal" aria-hidden="true"></button>
+       <h6 class="modal-title">删除投标</h6>
+      </div>
+      <div class="modal-body">
+       <h4>确定删除投标：ID{{selectedId}}？</h4>
+      </div>
+      <div class="modal-footer">
+       <a class="btn btn-link" data-dismiss="modal">取消</a>
+       <a class="btn btn-action" ng-model="loanId" ng-click="removeNote()">删除</a>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div id="notifications" ng-show="notify.messages.msg.length &gt; 0" class="ng-cloak affix-top" data-spy="affix" data-offset-top="0">
+    <div class="container">
+     <div class="msg-fold-up" ng-class="{ 'alert-success' : notify.messages.type == 'success', 'alert-danger' : notify.messages.type == 'error', 'alert-info' : notify.messages.type == 'info' }">
+     </div>
+     <div class="alert msg-content">
+      <a type="button" class="close sl-icon-cross" ng-click="notify.dismiss($index)" aria-hidden="true"></a>
+      <p ng-repeat="m in notify.messages.msg track by $index" ng-bind-html="m"></p>
+     </div>
+     <div class="msg-fold-down" ng-class="{ 'alert-success' : notify.messages.type == 'success', 'alert-danger' : notify.messages.type == 'error', 'alert-info' : notify.messages.type == 'info' }">
+     </div>
+    </div>
    </div>
 
-   <!--content--> 
-   <div id="loan-list" class="container loan-list" ng-controller="BrowseCtrl"> 
-    <div class="row"> 
-     <div class="tab-content"> 
-      <!-- plan market --> 
-      <div class="tab-pane active fade in" id="plan-market"> 
-       <div id="plan-market-banner" class="clearfix"> 
-        <div class="col-xs-6"> 
-         <a class="words" href="/market/groupLanding" target="_blank"> </a> 
-        </div> 
-        <div class="col-xs-6"> 
-         <a class="video" href="/video/groupVideo" target="_blank"></a> 
-        </div> 
-       </div> 
-       <div class="row"> 
+   <!--content-->
+   <div id="loan-list" class="container loan-list" ng-controller="BrowseCtrl">
+    <div class="row">
+     <div class="tab-content">
+      <!-- plan market -->
+      <div class="tab-pane active fade in" id="plan-market">
+       <div id="plan-market-banner" class="clearfix">
+        <div class="col-xs-6">
+         <a class="words" href="/market/groupLanding" target="_blank"> </a>
+        </div>
+        <div class="col-xs-6">
+         <a class="video" href="/video/groupVideo" target="_blank"></a>
+        </div>
+       </div>
+       <div class="row">
         <div class="col-xs-9">
   <p class="loading text-center ng-hide" ng-show="loadingPlan">
   <i class="spinner sl-icon-loading"></i>
@@ -244,6 +266,7 @@
   <span class="new-share-icon ng-hide" ng-show="plan.id == 185001"></span>
   </div>
   </div>
+<c:forEach items="${bids}" var="b">
   <div class="sl-plan-basic-info col-xs-7 sl-plan-link" ng-click="toDetail()">
   <h4 class="title ng-binding">活期投资团</h4>
   <p class="desc ng-binding">
@@ -254,8 +277,8 @@
   <div class="col-xs-4 sl-plan-rate">
   <label class="name col-xs-6">预计年化收益率</label>
   <label class="value col-xs-6 ng-binding">
-  5.5
-  <span>%</span>
+  <c:out value="${b.currentRate}" />
+      <span>%</span>
   </label>
   </div>
   <div class="col-xs-5 sl-plan-method">
@@ -263,7 +286,7 @@
   <p class="name" ng-show="plan.safeguardWay">保障级别</p>
   </div>
   <div class="col-xs-3 sl-plan-amount">
-  <p class="value number ng-binding" ng-show="plan.minInvestAmount">100元</p>
+  <p class="value number ng-binding" ng-show="plan.minInvestAmount"><c:out value="${b.minBidAmount}"></c:out>元</p>
   <p class="name" ng-show="plan.minInvestAmount">起投金额</p>
   </div>
   </div>
@@ -273,23 +296,24 @@
   <span class="sl-icon-account"></span>
   <label>
    已投金额
-  <span class="amount-text ng-binding">1,939.66</span>
-  <span>万元</span>
+      <span class="amount-text ng-binding"><c:out value="${b.currentSum}" /></span>
+  <span>元</span>
   </label>
   </div>
   <div>
   <span class="sl-icon-personal"></span>
   <label>
    加入人数
-  <span class="member-num-text ng-binding">4,881</span>
+  <span class="member-num-text ng-binding"><c:out value="${b.bidCount}" /></span>
   <span>人</span>
   </label>
   </div>
-  <a class="btn btn-block btn-secondary btn-embossed" href="market/plan?planId=157001" ng-show="!isOpen && plan.openAmount>0 ">立即加入</a>
+  <a class="btn btn-block btn-secondary btn-embossed" href="" onclick="add()" ng-show="!isOpen && plan.openAmount>0 ">立即加入</a>
   <div class="repayment-status ng-hide" ng-show="isOpen || !plan.openAmount ">
   <span>已满额</span>
   </div>
   </div>
+      </c:forEach>
   </div>
   </div>
 

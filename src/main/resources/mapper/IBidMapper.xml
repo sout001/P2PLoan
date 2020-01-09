@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.P2PLoan.home.mapper.IBidMapper">
+
+    <insert id="addBid">
+          insert into bid(actualRate, availableAmount, bidrequest_id, bidUser_id, bidTime, bidRequestTitle, bidRequestState)
+            values (#{actualRate},#{availableAmount},#{bidrequestId},#{bidUserId},#{bidTime},#{bidRequestTitle},#{bidRequestState});
+    </insert>
+
+</mapper>

@@ -2,6 +2,8 @@ package com.zking.P2PLoan.admin.service;
 
 import com.zking.P2PLoan.admin.model.LogininfoModel;
 
+import java.util.Set;
+
 /**
  * create by CSQ on 2019-12-15
  */
@@ -13,4 +15,8 @@ public interface LoginService {
      * @return LogininfoModel
      */
     LogininfoModel getUserByUserName(String username);
+
+    Set<String> getRolesByUserName(String userName);
+
+    Set<String> getPermissionByuserName(String userName);
 }

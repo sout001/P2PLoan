@@ -219,7 +219,7 @@
        <li> <a sl-scroll-to="" enable-old-ie="true" anchor="borrower-simple-faq" data-target="#borrower-simple-faq"> <span class="link-text">常见问题</span> </a> </li> 
       </ul> 
       <div class="nav navbar-nav navbar-right landing-nav-actions"> 
-       <a href="/account/create?type=borrower" class="btn navbar-btn btn-action btn-embossed">立即申请贷款</a> 
+       <a href="<% request.getContextPath(); %>/moeny" class="btn navbar-btn btn-action btn-embossed">立即申请贷款</a>
       </div> 
      </div> 
     </nav> 
@@ -407,7 +407,7 @@
    <div id="call-to-action"> 
     <div class="container footer-decor"> 
      <h4>实现梦想的路上需要各种助力</h4> 
-     <p><a class="btn btn-lg btn-action btn-embossed" href="/account/create?type=borrower">立即申请贷款</a></p> 
+     <p><a class="btn btn-lg btn-action btn-embossed" href="<% request.getContextPath(); %>/moeny"}">立即申请贷款</a></p>
     </div> 
    </div> 
   </div> 

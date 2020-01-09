@@ -17,6 +17,8 @@ public interface IpLogMapper {
      */
     void addRecordingByLogin(IplogModel iplogModel,LogininfoModel logininfoModel);
 
-    int DelByID(int id);
+    void DelByID(int id);
+
+    List<IplogModel> LogList(IplogModel iplogModel);
 
 }
